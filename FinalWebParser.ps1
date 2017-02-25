@@ -27,7 +27,7 @@ foreach ($image in $images) {if ($image -match "logo.png" -or $image -match "log
 #write-host "Live: $live"
 #Write-Host "Image Count: $imgnum"
 #Write-Host "Link Count: $hrfnum"
-$siteline = "<div class='uni'><h2>$title</h2><p>$about.</p><p>$live.</p><p>Stats:<br>Image Count: $imgnum<br>Link Count: $hrfnum</p><br><a href='$url'>Click here to visit our website</a><br><img src='$logo' alt='Image from $title' width='50%'></div>"
+$siteline = "<div class='uni'><h2>$title</h2><p><b>About:</b> $about.</p><p><b>Live:</b> $live.</p><p><b>Stats:</b><br>Image Count: $imgnum<br>Link Count: $hrfnum</p><br><a href='$url'>Click here to visit our website</a><br><br><img src='$logo' alt='Image from $title' width='50%'></div>"
 add-content $displaypage $siteline
 Write-Host "Page parsed!" -ForegroundColor Green -BackgroundColor Black
 $pagedata = $images = $title = $logo = $url = $about = $live = $imgnum = $hrfnum = ""
@@ -38,5 +38,5 @@ $lastline = "</body></html>"
 Add-Content $displaypage $lastline
 Write-Host "Sleeping now!" -ForegroundColor Cyan -BackgroundColor Black
 if ($open -eq 1) {Start-Process $displaypage; $open = 0}
-sleep(40)
+sleep(10)
 }
