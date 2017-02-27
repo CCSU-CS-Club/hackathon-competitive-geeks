@@ -1,14 +1,15 @@
-﻿# Geeks 00 02/25/2017 02/25/2017
+﻿# Geeks 00 02/25/2017 02/27/2017
 $open = 1
 $wwwtemp = "c:\temp\www.html"
-$displaypage = "c:\temp\display.html"
+$displaypage = "c:\temp\newdisp.html"
+$finalpage = "c:\temp\display.html"
 Write-Host "Welcome to Geeks Web Dash" -ForegroundColor Yellow -BackgroundColor Black
 while ($true) {
 set-content $displaypage ""
 $siteinfo = New-Object System.Collections.ArrayList
 $urlfile = "C:\Dropbox\_scripts\24hoc\websites.log"
 $urllist = get-content $urlfile
-$htmlline1 = "<!DOCTYPE html><html lang='en-us'><head><meta http-equiv='refresh' content='30'><style>body {background: #000000;}.uni {    height: 200px;    background: red; /* For browsers that do not support gradients */        background: -webkit-linear-gradient(left top, white, grey); /* For Safari 5.1 to 6.0 */    background: -o-linear-gradient(bottom right, white, grey); /* For Opera 11.1 to 12.0 */    background: -moz-linear-gradient(bottom right, white, grey); /* For Firefox 3.6 to 15 */    background: linear-gradient(to bottom right, white, grey); /* Standard syntax (must be last) */}h1 { text-align: center;  font-style: oblique;   color : white; }.uni {   float: left;   margin: 10px;   padding: 10px;   max-width: 300px;   height: 600px;   border: 1px solid black;   box-shadow: 10px 10px 5px #888888;   padding-left: 1cm;}   </style></head><body>background: #00ff00 url('smiley.gif') no-repeat fixed center;<h1>Geek's Web-Dash</h1>"
+$htmlline1 = "<!DOCTYPE html><html lang='en-us'><head><meta http-equiv='refresh' content='30'><style>body {background: #000000;}.uni {    height: 200px;    background: red; /* For browsers that do not support gradients */        background: -webkit-linear-gradient(left top, white, grey); /* For Safari 5.1 to 6.0 */    background: -o-linear-gradient(bottom right, white, grey); /* For Opera 11.1 to 12.0 */    background: -moz-linear-gradient(bottom right, white, grey); /* For Firefox 3.6 to 15 */    background: linear-gradient(to bottom right, white, grey); /* Standard syntax (must be last) */}h1 { text-align: center;  font-style: oblique;   color : white; }.uni {   float: left;   margin: 10px;   padding: 10px;   max-width: 300px;   height: 600px;   border: 1px solid black;   box-shadow: 10px 10px 5px #888888;   padding-left: 1cm;}   </style></head><body><h1>Geek's Web-Dash</h1>"
 Add-Content $displaypage $htmlline1
 foreach ($url in $urllist) {
 try {
@@ -37,6 +38,9 @@ catch  {
 $lastline = "</body></html>"
 Add-Content $displaypage $lastline
 Write-Host "Sleeping now!" -ForegroundColor Cyan -BackgroundColor Black
-if ($open -eq 1) {Start-Process $displaypage; $open = 0}
+if ($open -eq 1) {
+Move-Item $displaypage $finalpage -Force
+Start-Process $finalpage
+$open = 0}
 sleep(10)
 }
